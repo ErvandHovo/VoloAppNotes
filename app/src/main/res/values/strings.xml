@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">VoloAppNotes</string>
+
+    <string name="sign_in">login</string>
+    <string name="register">register</string>
+
+    <string name="save_note">Save</string>
+    <string name="delete_note">addNote</string>
+    <string name="logout_note">deleteNote</string>
+    <string name="color_chooser">Select Color</string>
+    <string name="date_chooser">Select Date</string>
+    <string name="time_chooser">Select Time</string>
+    <string name="notification_state_on">Notification On</string>
+    <string name="notification_state_off">Notification Off</string>
+    <string name="add_note">addNote</string>
+    <string name="delete_note_btn">Delete</string>
+
+
+</resources>

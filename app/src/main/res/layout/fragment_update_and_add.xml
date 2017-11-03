@@ -1,0 +1,148 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.example.ervand.voloappnotes.view.fragments.UpdateAndAddFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="18dp"
+        android:orientation="vertical"
+        android:layout_marginBottom="25dp">
+
+        <EditText
+            android:id="@+id/edtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Title"
+            android:maxLength="30"
+            android:textSize="30sp"
+            android:maxLines="1"/>
+
+        <EditText
+            android:id="@+id/edtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:hint="description"
+            android:maxLength="200"
+            android:maxLines="3"
+            android:padding="12dp"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/btnDateChooser"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:text="@string/date_chooser"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtDateText"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:hint="Date"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/btnTimeChooser"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:text="@string/time_chooser"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtTimeText"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:hint="Time"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/btnColorChooser"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/color_chooser"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="30dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chbNotificationState"
+                android:focusable="false"/>
+
+            <TextView
+                android:id="@+id/txtNotificationState"
+                android:layout_width="200dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textAlignment="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnSaveNote"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/save_note"
+            android:background="@drawable/btnsavestyle"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"/>
+
+        <Button
+            android:id="@+id/btnDeleteNote"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/delete_note_btn"
+            android:background="@drawable/btnsavestyle"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

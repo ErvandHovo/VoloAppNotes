@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2b1e1e</color>
+    <color name="colorPrimaryDark">#221818</color>
+    <color name="colorAccent">#2b1e1e</color>
+    <color name="colorDescription">#dcdcdc</color>
+    <color name="buttonColor">#2b1e1e</color>
+    <color name="textColor">#d1cbbb</color>
+    <color name="backgroundColor">#d8ccbc</color>
+    <color name="eventItemBack">#83c7c7c7</color>
+    <color name="colorBtnSave">#26A69A</color>
+</resources>

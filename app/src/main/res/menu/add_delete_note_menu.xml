@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/add_note"
+        android:orderInCategory="200"
+        android:title="@string/add_note"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_note_add_white_24dp"/>
+
+    <item
+        android:id="@+id/logout_note"
+        android:orderInCategory="200"
+        android:title="@string/logout_note"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_home_white_24dp"/>
+</menu>
