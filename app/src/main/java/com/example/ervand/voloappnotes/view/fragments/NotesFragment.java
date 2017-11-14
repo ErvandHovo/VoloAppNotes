@@ -22,8 +22,6 @@ import com.example.ervand.voloappnotes.model.Note;
 import com.example.ervand.voloappnotes.view.activities.MainActivity;
 import com.example.ervand.voloappnotes.view.adapters.NoteAdapter;
 import butterknife.BindView;
-import io.realm.RealmList;
-import io.realm.RealmResults;
 
 public class NotesFragment extends Fragment implements SwitchFragment{
 
@@ -102,4 +100,6 @@ public class NotesFragment extends Fragment implements SwitchFragment{
                 .addToBackStack(null)
                 .commit();
     }
+
+    
 }

@@ -11,7 +11,8 @@
         android:background="@drawable/background"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:id="@+id/lLayoutRegisterFragment">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -44,14 +45,40 @@
             </LinearLayout>
         </ScrollView>
 
-            <Button
-                android:id="@+id/btnRegisterBtn"
+        <Button
+            android:id="@+id/btnRegisterBtn"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button"
+            android:text="@string/register"
+            android:textColor="@color/textColor" />
+
+        <LinearLayout
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
+
+            <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/button"
-                android:text="@string/register"
-                android:textColor="@color/textColor" />
+                android:text="@string/already_have_an_account"
+                android:textStyle="italic" />
 
+            <TextView
+                android:id="@+id/txtGoLoginPage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login"
+                android:layout_marginLeft="10dp"
+                android:textStyle="italic|bold"
+                android:textSize="16sp"
+                android:textColor="@color/colorBtnSave"/>
+
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

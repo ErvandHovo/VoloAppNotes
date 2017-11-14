@@ -12,33 +12,39 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
 import com.example.ervand.voloappnotes.R;
 import com.example.ervand.voloappnotes.model.Note;
 import com.example.ervand.voloappnotes.view.activities.MainActivity;
 import com.flask.colorpicker.OnColorSelectedListener;
 import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.realm.Realm;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public class UpdateAndAddFragment extends Fragment implements View.OnClickListener,
         SwitchFragment {
@@ -102,7 +108,6 @@ public class UpdateAndAddFragment extends Fragment implements View.OnClickListen
         color = Color.BLACK;
         return view;
     }
-
 
 
     public void setNote(Note note) {
@@ -194,6 +199,7 @@ public class UpdateAndAddFragment extends Fragment implements View.OnClickListen
             if (chbNotificationState.isChecked()) {
                 notificationCreate();
             }
+            Toast.makeText(getContext(), "Note saved", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getContext(), "Please input fields Title and Description",
                     Toast.LENGTH_SHORT).show();
@@ -217,7 +223,8 @@ public class UpdateAndAddFragment extends Fragment implements View.OnClickListen
     }
 
     @OnClick({R.id.btnColorChooser, R.id.btnDateChooser,
-            R.id.btnTimeChooser, R.id.btnSaveNote, R.id.chbNotificationState,R.id.btnDeleteNote})
+            R.id.btnTimeChooser, R.id.btnSaveNote, R.id.chbNotificationState, R.id.btnDeleteNote,
+            R.id.lLayoutUpdateAndAddFragment})
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -234,10 +241,7 @@ public class UpdateAndAddFragment extends Fragment implements View.OnClickListen
                 onSaveButtonClick();
                 break;
             case R.id.btnDeleteNote:
-                realm.beginTransaction();
-                MainActivity.user.getNoteList().remove(note);
-                realm.commitTransaction();
-                switchFragment(new NotesFragment(), R.id.mainContainer, "Notes page");
+                openDialogDelete();
                 break;
             case R.id.chbNotificationState:
                 if (chbNotificationState.isChecked()) {
@@ -246,10 +250,43 @@ public class UpdateAndAddFragment extends Fragment implements View.OnClickListen
                     txtNotificationState.setText(R.string.notification_state_off);
                 }
                 break;
+            case R.id.lLayoutUpdateAndAddFragment:
+                if (getActivity().getCurrentFocus() != null) {
+                    InputMethodManager inputMethodManager = (InputMethodManager)
+                            getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(getActivity()
+                            .getCurrentFocus().getWindowToken(), 0);
+                }
+                break;
             default:
                 break;
         }
     }
+
+    private void openDialogDelete() {
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+        dialog.setCancelable(false);
+        dialog.setTitle("Delete note");
+        dialog.setMessage("Are you sure you want to delete this entry?");
+        dialog.setNegativeButton("delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                realm.beginTransaction();
+                MainActivity.user.getNoteList().remove(note);
+                realm.commitTransaction();
+                switchFragment(new NotesFragment(), R.id.mainContainer, "Notes page");
+            }
+        })
+                .setPositiveButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+        final AlertDialog alert = dialog.create();
+        alert.show();
+    }
+
 
     private void notificationCreate() {
         Intent intent = new Intent();

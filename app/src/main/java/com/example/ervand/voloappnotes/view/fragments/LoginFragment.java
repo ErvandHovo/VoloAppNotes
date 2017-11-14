@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.ervand.voloappnotes.R;
@@ -18,6 +18,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.realm.Realm;
 import io.realm.RealmResults;
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public class LoginFragment extends Fragment implements SwitchFragment {
 
@@ -29,7 +30,6 @@ public class LoginFragment extends Fragment implements SwitchFragment {
 
     @BindView(R.id.edtPassword)
     EditText edtPassword;
-
 
     public LoginFragment() {
         // Required empty public constructor
@@ -60,8 +60,8 @@ public class LoginFragment extends Fragment implements SwitchFragment {
         return view;
     }
 
-    @OnClick({R.id.btnLogin, R.id.btnRegister})
-    void onClick(Button button) {
+    @OnClick({R.id.btnLogin, R.id.txtGoRegisterPage, R.id.lLayoutLoginFragment})
+    void onClick(View button) {
         switch (button.getId()) {
             case R.id.btnLogin:
                 if (isCheckLoginAndPassword(edtLogin.getText().toString().trim(),
@@ -74,8 +74,17 @@ public class LoginFragment extends Fragment implements SwitchFragment {
                             Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case R.id.btnRegister:
+            case R.id.txtGoRegisterPage:
                 switchFragment(new RegisterFragment(), R.id.mainContainer, "Register Page");
+                break;
+            case R.id.lLayoutLoginFragment:
+                if (getActivity().getCurrentFocus() != null){
+                    InputMethodManager inputMethodManagerLog = (InputMethodManager)
+                            getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                    inputMethodManagerLog.hideSoftInputFromWindow(getActivity()
+                            .getCurrentFocus().getWindowToken(), 0);
+                }
+                break;
             default:
                 break;
         }

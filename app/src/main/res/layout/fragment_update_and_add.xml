@@ -10,7 +10,8 @@
         android:layout_height="match_parent"
         android:layout_margin="18dp"
         android:orientation="vertical"
-        android:layout_marginBottom="25dp">
+        android:layout_marginBottom="25dp"
+        android:id="@+id/lLayoutUpdateAndAddFragment">
 
         <EditText
             android:id="@+id/edtTitle"

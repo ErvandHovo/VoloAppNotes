@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">VoloAppNotes</string>
+    <string name="app_name">Notes</string>
 
-    <string name="sign_in">login</string>
-    <string name="register">register</string>
-
+    <string name="sign_in">Login</string>
+    <string name="register">Register</string>
     <string name="save_note">Save</string>
     <string name="delete_note">addNote</string>
     <string name="logout_note">deleteNote</string>
@@ -14,6 +13,9 @@
     <string name="notification_state_off">Notification Off</string>
     <string name="add_note">addNote</string>
     <string name="delete_note_btn">Delete</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="already_have_an_account">Already have an account?</string>
 
 
 </resources>

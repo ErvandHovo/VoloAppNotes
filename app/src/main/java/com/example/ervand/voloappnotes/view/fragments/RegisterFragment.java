@@ -6,21 +6,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.ervand.voloappnotes.R;
 import com.example.ervand.voloappnotes.constants.Constants;
 import com.example.ervand.voloappnotes.model.User;
-
 import java.util.regex.Matcher;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.realm.Realm;
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public class RegisterFragment extends Fragment implements SwitchFragment {
 
@@ -59,31 +58,48 @@ public class RegisterFragment extends Fragment implements SwitchFragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    @OnClick({R.id.btnRegisterBtn})
-    void onClick(Button button) {
+    @OnClick({R.id.btnRegisterBtn, R.id.txtGoLoginPage, R.id.lLayoutRegisterFragment})
+    void onClick(View button) {
         switch (button.getId()) {
             case R.id.btnRegisterBtn:
                 if (isValidFields()) {
-                    if (!isValidEmail(edtRegisterLogin.getText().toString().trim())) {
-                        edtRegisterLogin.setError("Email address is invalid");
-                    }
-                    if (!isValidPassword(edtRegisterPassword.getText().toString().trim())) {
-                        edtRegisterPassword.setError("The password must contain 8-12 " +
-                                "characters,mandatory numbers and symbols\n");
-                    } else {
-                        User user = new User(edtRegisterLogin.getText().toString().trim()
-                                , edtRegisterPassword.getText().toString().trim());
+                    if (isValidEmail(edtRegisterLogin.getText().toString().trim())) {
+                        if (isValidPassword(edtRegisterPassword.getText().toString().trim())) {
+                            User user = new User(edtRegisterLogin.getText().toString().trim()
+                                    , edtRegisterPassword.getText().toString().trim());
 
-                        saveUserToDB(user);
-                        switchFragment(new LoginFragment(), R.id.mainContainer,
-                                "Login page");
-                        edtRegisterPassword.setText("");
-                        edtRegisterLogin.setText("");
+                            saveUserToDB(user);
+                            switchFragment(new LoginFragment(), R.id.mainContainer,
+                                    "Login page");
+                            edtRegisterPassword.setText("");
+                            edtRegisterLogin.setText("");
+                            Toast.makeText(getContext(), "User saved", Toast.LENGTH_SHORT)
+                                    .show();
+                        } else {
+                            edtRegisterPassword.setError("The password must contain 8-12 " +
+                                    "characters,mandatory numbers and symbols\n");
+                        }
+                    } else {
+                        edtRegisterLogin.setError("Email address is invalid");
                     }
                 } else {
                     Toast.makeText(getActivity(), "Please Complete all fields ",
                             Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.txtGoLoginPage:
+                switchFragment(new LoginFragment(), R.id.mainContainer, "Login page");
+                break;
+            case R.id.lLayoutRegisterFragment:
+                if (getActivity().getCurrentFocus() != null){
+                    InputMethodManager inputMethodManagerReg = (InputMethodManager)
+                            getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                    inputMethodManagerReg.hideSoftInputFromWindow(getActivity()
+                            .getCurrentFocus().getWindowToken(), 0);
+                }
+                break;
+            default:
+                break;
         }
     }
 
